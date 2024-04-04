@@ -1,5 +1,4 @@
-# ansible_docker_flask
-Ansible Flask app with Docker
+# Ansible Flask app with Docker
 
 ## Specifications
 
