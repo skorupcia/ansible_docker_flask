@@ -15,12 +15,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     rsync__exclude: ".git/"
   
   config.vm.hostname = "docker-flask.test"
-  config.vm.provider paralells do |prl|
-    prl.name = "docker-flast.test"
+  config.vm.provider "parallels" do |prl|
+    prl.name = "docker-flask.test"
     prl.memory = 1024
     prl.cpus = 2
-    prl.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    prl.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
   #enable provisioning with Ansible

@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  become: true
+
+  tasks:
+    - name: Get host ip address.
+      ansible.builtin.shell: "/sbin/ip route | awk '/default/ { print $3 }'"
+      register: host_ip
+      changed_when: false
+
+    - name: Set host_ip_address variable.
+      ansible.builtin.set_fact:
+        host_ip_address: "{{ host_ip.stdout }}"
+
+    - name: Copy Flask app into place.
+      ansible.builtin.template:
+        src: /etc/ansible/index.py.j2
+        dest: /opt/www/index.py
+        mode: 0755
+
+    - name: Copy Flask template into place.
+      ansible.builtin.copy:
+        src: /etc/ansible/templates
+        dest: /opt/www
+        mode: 0755
